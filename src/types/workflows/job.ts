@@ -34,7 +34,7 @@ export interface IJob {
   'runs-on': "ubuntu-latest"| "windows-latest"| "macos-latest"
   steps: IStep[]
   permissions?: IPermission[]
-  needs?: IJob[],
+  needs?: string[],
   if?: string,
   uses?: string
   environment?: string | {name: string, url: string}

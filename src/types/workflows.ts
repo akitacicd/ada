@@ -3,8 +3,6 @@ import {IJob} from './workflows/job';
 import {IEvents} from './workflows/events';
 import {IPermission} from './workflows/permission';
 
-// TODO: implement on
-// https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#on
 export interface IWorkflow {
   name: string,
   jobs: {[key: string]: IJob}

@@ -1,5 +1,5 @@
 export interface IDefaultKeyPair {
-  [key: string]: string,
+  [key: string]: string | boolean | number,
 }
 
 export interface IWorkflowDefaults {
@@ -8,6 +8,7 @@ export interface IWorkflowDefaults {
     workingDirectory: string
   }
 }
+
 export interface IConcurrency {
   group: string, 
   cancelInProgress: boolean

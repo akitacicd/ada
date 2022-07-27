@@ -10,6 +10,7 @@ export class Job implements JobArgs {
     this.name = name
     this.job = job
   }
+
   getJob(){
     return {[this.name]: this.job}
   }
