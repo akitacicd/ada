@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "typescript": "^4.7.4"
+  },
+  "dependencies": {
+    "yaml": "^2.1.1"
+  }
+}
