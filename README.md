@@ -1,2 +1,2 @@
 # ADA
-Github action typescript DSL.
+Github worfklows typescript DSL.
