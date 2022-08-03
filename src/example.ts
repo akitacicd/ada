@@ -9,15 +9,7 @@ const checkoutCodeStep = new Step({
   with: {
     'ref': '${{ github.head_ref }}',
   }
-});
-
-const setupNode = new Step({
-  name: 'Use Node.js ${{ matrix.node-version }}',
-  uses: 'actions/setup-node@v3.1.0',
-  with: {
-    'node-version': '16.x'
-  }
-});
+})
 
 const installDependencies = new Step({
   name: 'Install dependencies',
@@ -34,9 +26,8 @@ const buildJob = new Job('build', {
   'runs-on': 'ubuntu-latest',
   steps: [
     checkoutCodeStep.step,
-    setupNode.step,
     installDependencies.step,
-    compile.step
+    compile.step,
   ]
 });
 
@@ -46,7 +37,7 @@ export const buildWorkflow = new Workflow({
   on: {
     push: {branches: ['main']}
   },
-  jobs: buildJob.getJob()
+  jobs: {...buildJob.getJob()}
 });
 
 console.log(buildWorkflow.toGithubWorkflow());

@@ -1,5 +1,4 @@
 import {IJob} from '../../types/workflows/job';
-
 interface JobArgs {
   name: string,
   job: IJob

@@ -352,7 +352,6 @@ export interface IWorkflowRun {
   'workflow_run': IWorkflowRunArgs
 }
 
-
 export type IEvents = IBranchProtectionRule | ICheckRun | ICheckSuite | ICreate | IDelete | IDeployment | IDeploymentStatus |
 IDiscussion | IDiscussionComment | IFork | IGollum | IIssueComment | IIssue | ILabel | IMilestone | IPageBuild |
 IProject | IProjectCard | IProjectColumn | IPublic | IPullRequest |  IPullRequestReview |

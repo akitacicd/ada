@@ -9,8 +9,8 @@ const configureAudit = new Step({
   with: {
     'egress-policy': 'audit'
   }
-
 })
+
 const checkoutCodeStep = new Step({
   name: 'Checkout',
   uses: 'actions/checkout@v3',
