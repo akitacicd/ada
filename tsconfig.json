@@ -1,14 +1,21 @@
 {
   "compilerOptions": {
+    "rootDirs": [
+      "components",
+      "cli",
+      "helpers"
+    ],
     "declaration": true,
     "importHelpers": true,
     "module": "commonjs",
-    "outDir": "dist",
-    "rootDir": "src",
+    "baseUrl": ".",
+    "sourceMap": true,
     "strict": true,
     "target": "es2019"
   },
   "include": [
-    "src/**/*"
+    "cli/**/*.ts",
+    "components/**/*.ts",
+    "helpers/**/*.ts"
   ]
 }
