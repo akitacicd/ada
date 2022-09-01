@@ -13,12 +13,13 @@
     "yaml": "^2.1.1"
   },
   "files": [
+    "index.ts",
+    "index.js",
+    "index.d.js",
     "cli/",
     "helpers",
     "components"
   ],
-  "main": "dist/cli.js",
-  "types": "dist/cli.d.js",
   "scripts": {
     "ada": "node cli/index.js"
   }

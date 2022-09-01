@@ -14,6 +14,7 @@
     "target": "es2019"
   },
   "include": [
+    "index.ts",
     "cli/**/*.ts",
     "components/**/*.ts",
     "helpers/**/*.ts"
