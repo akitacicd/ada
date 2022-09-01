@@ -3,8 +3,7 @@ import { Step } from '../../workflows/step';
 import {IPermission} from './permission';
 
 interface IMatrix {
-  name: string
-  value: string[]
+  [key: string]: any,
 }
 
 // TODO add include/exclude support
