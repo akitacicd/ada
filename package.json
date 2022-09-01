@@ -12,8 +12,15 @@
     "ts-node": "^10.9.1",
     "yaml": "^2.1.1"
   },
-  "files": ["dist/"],
+  "files": [
+    "cli/",
+    "helpers",
+    "components"
+  ],
   "main": "dist/cli.js",
-  "types": "dist/cli.d.js"
+  "types": "dist/cli.d.js",
+  "scripts": {
+    "ada": "node cli/index.js"
+  }
 }
 
