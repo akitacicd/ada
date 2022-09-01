@@ -23,7 +23,6 @@ jobs:
         
       - name: Compile project
         run: npx tsc
-      - run: cat .npmrc
       - run: cat ~/.npmrc
       - name: Publish package
         run: npm publish
