@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { Command } from 'commander';
 import { LoadMode, loadSync } from 'ts-import';
 import { Workflow } from './components/workflows/workflow';
