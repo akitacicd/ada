@@ -4,12 +4,12 @@ export interface IDefaultKeyPair {
 
 export interface IWorkflowDefaults {
   run: {
-    shell: string
-    workingDirectory: string
+    shell?: string
+    'working-directory'?: string
   }
 }
 
 export interface IConcurrency {
-  group: string, 
-  cancelInProgress: boolean
+  group?: string, 
+  'cancel-in-progress'?: boolean
 }

@@ -1,18 +1,36 @@
 import * as yaml from 'yaml';
-import {IWorkflow} from '../../types/workflows';
+import { Job } from './job';
+import {WorkflowClass} from '../../types/workflows';
 
-interface WorkflowArgs {
-  workflow: IWorkflow
-}
+type Jobs = {[key: string]: Omit<Job, 'name'>}
 
-export class Workflow implements WorkflowArgs {
-  constructor(public workflow: IWorkflow) {
-    this.workflow = workflow;
+export class Workflow extends WorkflowClass {
+  toString(): string {
+    // @ts-expect-error
+    this.jobs = this.jobs.reduce((allJobs: Jobs, job: Job) => {
+      let jobName = job.name
+      // @ts-expect-error
+      delete job.name
+      let jobObject: Omit<Job, 'name'> = job
+      allJobs[jobName] = jobObject
+      return allJobs
+    },
+      {})
+
+    return yaml.stringify(this, {
+      aliasDuplicateObjects: false,
+      lineWidth: 0,
+      minContentWidth: 0,
+    })
   }
 
-  toGithubWorkflow(): string {
-    return yaml.stringify(this.workflow, {
-      aliasDuplicateObjects: false
+  async validateActions(): Promise<boolean> {
+    // @ts-expect-error
+    return await this.jobs.map(async (job: Job) => {
+      let stepsValids = job.steps.map(async (step) => {
+        return await step.validate()
+      })
+      return stepsValids
     })
   }
 }

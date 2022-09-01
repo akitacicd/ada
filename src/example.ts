@@ -1,8 +1,7 @@
-import {Step} from './components/workflows/step';
-import {Job} from './components/workflows/job';
-import {Workflow} from './components/workflows/workflow';
+import { Job } from './components/workflows/job';
+import { Step } from './components/workflows/step';
+import { Workflow } from './components/workflows/workflow';
 
-// Steps
 const checkoutCodeStep = new Step({
   name: 'Checkout code',
   uses: 'actions/checkout@v3',
@@ -11,33 +10,31 @@ const checkoutCodeStep = new Step({
   }
 })
 
-const installDependencies = new Step({
-  name: 'Install dependencies',
-  run: 'npm ci'
-});
+const dependenciesScan = new Step({
+  name: 'Dependencies scan',
+  uses: 'clj-holmes/clj-watson-action@main',
+  with: {
+    'clj-watson-sha': "9972a33",
+    'clj-watson-tag': "v4.0.0",
+    'database-strategy': 'github-advisory',
+    'deps-edn-path': 'deps.edn'
+  }
+})
 
-const compile = new Step({
-  name: 'Compile',
-  run: 'npm ci'
-});
+const testJob = new Job('test', {
+  runsOn: 'ubuntu-latest',
+  steps: [checkoutCodeStep, dependenciesScan]
+})
 
-// Jobs
 const buildJob = new Job('build', {
-  'runs-on': 'ubuntu-latest',
-  steps: [
-    checkoutCodeStep.step,
-    installDependencies.step,
-    compile.step,
-  ]
-});
+  runsOn: 'ubuntu-latest',
+  permissions: {contents: 'write'},
+  needs: [testJob.name],
+  steps: [checkoutCodeStep]
+})
 
-// Workflow
-export const buildWorkflow = new Workflow({
-  name: 'Build typescript project',
-  on: {
-    push: {branches: ['main']}
-  },
-  jobs: {...buildJob.getJob()}
-});
-
-console.log(buildWorkflow.toGithubWorkflow());
+export const workflowExample = new Workflow({
+  name: 'testing dsl workflow generator',
+  on: {'workflow_dispatch': {}},
+  jobs: [testJob, buildJob]
+})

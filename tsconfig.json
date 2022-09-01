@@ -1,16 +1,14 @@
 {
   "compilerOptions": {
-    "target": "ES2015",
+    "declaration": true,
+    "importHelpers": true,
     "module": "commonjs",
+    "outDir": "dist",
+    "rootDir": "src",
     "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "tsBuildInfoFile": "./",
-    "outDir": "build",
-    "incremental": true,
-    "composite": true
+    "target": "es2019"
   },
-  "$schema": "https://json.schemastore.org/tsconfig",
-  "display": "Recommended"
+  "include": [
+    "src/**/*"
+  ]
 }

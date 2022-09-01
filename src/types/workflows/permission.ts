@@ -1,22 +1,18 @@
-enum PermissionScope {
-  'read',
-  'write',
-  'none',
-}
+type PermissionScope = 'read' | 'write' | 'none'
 
 interface Permission {
   actions?: PermissionScope,
   checks?: PermissionScope,
   contents?: PermissionScope,
   deployments?: PermissionScope,
-  idToken?: PermissionScope,
+  'id-token'?: PermissionScope,
   issues?: PermissionScope,
   discussions?: PermissionScope,
   packages?: PermissionScope,
   pages?: PermissionScope,
-  pullRequests?: PermissionScope,
-  repositoryProjects?: PermissionScope,
-  securityEvents?: PermissionScope,
+  'pull-requests'?: PermissionScope,
+  'repository-projects'?: PermissionScope,
+  'security-events'?: PermissionScope,
   statuses?: PermissionScope,
 }
 

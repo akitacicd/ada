@@ -1,16 +1,12 @@
-import {IJob} from '../../types/workflows/job';
-interface JobArgs {
-  name: string,
-  job: IJob
-}
+import * as yaml from 'yaml';
+import {JobClass} from '../../types/workflows/job';
 
-export class Job implements JobArgs {
-  constructor(public name: string, public job: IJob) {
-    this.name = name
-    this.job = job
-  }
-
-  getJob(){
-    return {[this.name]: this.job}
+export class Job extends JobClass {
+  public toString(): string {
+    return yaml.stringify(this, {
+      aliasDuplicateObjects: false,
+      lineWidth: 0,
+      minContentWidth: 0,
+    })
   }
 }
