@@ -2,8 +2,7 @@ import { IDefaultKeyPair, IWorkflowDefaults, IConcurrency } from './common';
 import { Step } from '../../workflows/step';
 import { IPermission } from './permission';
 interface IMatrix {
-    name: string;
-    value: string[];
+    [key: string]: any;
 }
 interface IStrategy {
     matrix?: IMatrix[];
