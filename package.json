@@ -1,5 +1,6 @@
 {
   "name": "ada",
+  "version": "1.0.0",
   "devDependencies": {
     "typescript": "^4.7.4"
   },
