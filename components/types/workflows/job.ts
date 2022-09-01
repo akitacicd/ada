@@ -10,7 +10,7 @@ interface IMatrix {
 // https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstrategymatrixinclude
 // https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstrategymatrixexclude
 interface IStrategy {
-  matrix?: IMatrix[],
+  matrix?: IMatrix,
   'fail-fast'?: boolean,
   'max-parallel'?: number
 }
@@ -30,7 +30,7 @@ interface IContainer {
 // TODO: implement service
 // https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idservices
 export interface IJob {
-  runsOn: "ubuntu-latest"| "windows-latest"| "macos-latest"
+  runsOn: "ubuntu-latest"| "windows-latest"| "macos-latest" | string
   steps: Step[]
   permissions?: IPermission
   needs?: string[]
