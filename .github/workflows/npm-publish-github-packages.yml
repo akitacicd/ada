@@ -1,29 +1,75 @@
-name: Publish package to GitHub Packages
+name: Deploy
+
 on:
-  release:
-    types: [created]
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+    paths-ignore:
+      - 'README.md'
+
+  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: ubuntu-latest 
-    permissions: 
-      contents: read
-      packages: write 
+  deploy:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+
     steps:
-      - uses: actions/checkout@v3
-      
-      - uses: actions/setup-node@v3
+      - name: Checkout bin branch
+        uses: actions/checkout@v3
         with:
-          node-version: '14.x'
-          registry-url: 'https://npm.pkg.github.com'
+          ref: latest
+          path: latest
 
-      - name: Install dependencies 
+      - name: Checkout main branch
+        uses: actions/checkout@v3
+        with:
+          path: current
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3.1.0
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
         run: npm ci
+        working-directory: current
 
-      - name: Compile project
+      - name: Compile
         run: npx tsc
+        working-directory: current
 
-      - run: npm publish --@akita-cicd:registry=https://npm.pkg.github.com/
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Prepare gitignore
+        run: echo "*node_modules/" > .gitignore
+        working-directory: latest
+
+      - name: Get current version
+        run: |
+          echo "CURRENT_VERSION=$(npx json -f package.json version)" >> $GITHUB_ENV
+        working-directory: latest
+
+      - name: Move files
+        run: |
+          rm -rf ./**
+          cp -r ../current/** ./
+          npx json -I -f package.json -e "this.version='$CURRENT_VERSION'"
+        working-directory: latest
+
+      - name: Prepare Git
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email github-actions[bot]@github.com
+          git add --all
+          git commit -m "Build ${{ github.sha }}"
+        working-directory: latest
+
+      - name: Bump Version & Push
+        run: |
+          npm version patch
+          git status
+          git push --set-upstream origin latest --tags
+        working-directory: latest
