@@ -52,7 +52,6 @@ export interface IJob {
 export class JobClass {
   public name: string
   public 'runs-on': 'ubuntu-latest'| 'windows-latest' | 'macos-latest' | string
-  public steps: Step[]
   public permissions?: IPermission
   public needs?: string[]
   public if?: string
@@ -68,12 +67,12 @@ export class JobClass {
   public 'continue-on-error'?: boolean
   public container?: IContainer | string
   public services?: string
+  public steps: Step[]
 
   constructor(name: string, jobArgs: IJob) {
     this.name = name 
     this['runs-on'] = jobArgs.runsOn 
     this['continue-on-error'] = jobArgs.continueOnError
-    this.steps = jobArgs.steps
     this.permissions = jobArgs.permissions
     this.needs = jobArgs.needs
     this.if = jobArgs.if
@@ -88,5 +87,6 @@ export class JobClass {
     this.strategy = jobArgs.strategy
     this.container = jobArgs.container
     this.services = jobArgs.services
+    this.steps = jobArgs.steps
   }
 }

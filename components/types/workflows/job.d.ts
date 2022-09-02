@@ -45,7 +45,6 @@ export interface IJob {
 export declare class JobClass {
     name: string;
     'runs-on': 'ubuntu-latest' | 'windows-latest' | 'macos-latest' | string;
-    steps: Step[];
     permissions?: IPermission;
     needs?: string[];
     if?: string;
@@ -64,6 +63,7 @@ export declare class JobClass {
     'continue-on-error'?: boolean;
     container?: IContainer | string;
     services?: string;
+    steps: Step[];
     constructor(name: string, jobArgs: IJob);
 }
 export {};

@@ -6,7 +6,6 @@ class JobClass {
         this.name = name;
         this['runs-on'] = jobArgs.runsOn;
         this['continue-on-error'] = jobArgs.continueOnError;
-        this.steps = jobArgs.steps;
         this.permissions = jobArgs.permissions;
         this.needs = jobArgs.needs;
         this.if = jobArgs.if;
@@ -21,6 +20,7 @@ class JobClass {
         this.strategy = jobArgs.strategy;
         this.container = jobArgs.container;
         this.services = jobArgs.services;
+        this.steps = jobArgs.steps;
     }
 }
 exports.JobClass = JobClass;
