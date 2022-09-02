@@ -22,6 +22,9 @@
   ],
   "scripts": {
     "ada": "node cli/index.js"
+  },
+  "bin": {
+    "ada": "cli/ada"
   }
 }
 
