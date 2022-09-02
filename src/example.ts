@@ -1,6 +1,6 @@
-import { Job } from './components/workflows/job';
-import { Step } from './components/workflows/step';
-import { Workflow } from './components/workflows/workflow';
+import { Job } from '../components/workflows/job';
+import { Step } from '../components/workflows/step';
+import { Workflow } from '../components/workflows/workflow';
 
 const checkoutCodeStep = new Step({
   name: 'Checkout code',
