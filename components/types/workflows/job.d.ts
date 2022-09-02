@@ -5,7 +5,7 @@ interface IMatrix {
     [key: string]: any;
 }
 interface IStrategy {
-    matrix?: IMatrix[];
+    matrix?: IMatrix;
     'fail-fast'?: boolean;
     'max-parallel'?: number;
 }
@@ -21,7 +21,7 @@ interface IContainer {
     options?: string;
 }
 export interface IJob {
-    runsOn: "ubuntu-latest" | "windows-latest" | "macos-latest";
+    runsOn: "ubuntu-latest" | "windows-latest" | "macos-latest" | string;
     steps: Step[];
     permissions?: IPermission;
     needs?: string[];
@@ -44,7 +44,7 @@ export interface IJob {
 }
 export declare class JobClass {
     name: string;
-    'runs-on': 'ubuntu-latest' | 'windows-latest' | 'macos-latest';
+    'runs-on': 'ubuntu-latest' | 'windows-latest' | 'macos-latest' | string;
     steps: Step[];
     permissions?: IPermission;
     needs?: string[];

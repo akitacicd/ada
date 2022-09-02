@@ -1,8 +1,9 @@
 interface IEventArgs {
-  'branches'?: string[],
-  'branches-ignore'?: string[],
-  paths?: string[]
-  tags?: string[]
+  'branches'?: string[] | string
+  'branches-ignore'?: string[] | string
+  'paths-ignore'?: string[] | string
+  paths?: string[] | string
+  tags?: string[] | string
 }
 
 // branch_protection_rule
