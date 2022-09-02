@@ -32,8 +32,8 @@ export class StepClass implements IStep {
     this.id = stepArgs.id
     this.if = stepArgs.if
     this.uses = stepArgs.uses
-    this.run = stepArgs.run
     this.bash = stepArgs.bash
+    this.run = stepArgs.run
     this.with = stepArgs.with
     this.env = stepArgs.env
     this['working-directory'] = stepArgs.workingDirectory
