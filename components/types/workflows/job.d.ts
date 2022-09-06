@@ -8,15 +8,29 @@ interface IStrategy {
     matrix?: IMatrix;
     'fail-fast'?: boolean;
     'max-parallel'?: number;
+    include?: IEnv[];
+    exclude?: IEnv[];
+}
+interface ICredentials {
+    username: string;
+    password: string;
+}
+interface IEnv {
+    [key: string]: any;
 }
 interface IContainer {
     image: string;
-    credentials?: {
-        username: string;
-        password: string;
-    };
-    env?: IDefaultKeyPair[];
+    credentials?: ICredentials;
+    env?: IEnv;
     ports?: number[];
+    volumes?: string[];
+    options?: string;
+}
+interface IService {
+    image: string;
+    ports?: string[];
+    credentials?: ICredentials;
+    env?: IEnv;
     volumes?: string[];
     options?: string;
 }
@@ -40,7 +54,7 @@ export interface IJob {
     strategy?: IStrategy;
     continueOnError?: boolean;
     container?: IContainer | string;
-    services?: string;
+    services?: IService;
 }
 export declare class JobClass {
     name: string;
@@ -62,7 +76,7 @@ export declare class JobClass {
     strategy?: IStrategy;
     'continue-on-error'?: boolean;
     container?: IContainer | string;
-    services?: string;
+    services?: IService;
     steps: Step[];
     constructor(name: string, jobArgs: IJob);
 }
