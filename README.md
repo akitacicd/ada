@@ -5,7 +5,7 @@ Github worfklows typescript DSL.
 Add the following line to your project dependecies in the `package.json` file 
 ```json
 {
-  "@akitacicd/ada": "github:akitacicd/ada#v1.0.10"
+  "@akitacicd/ada": "github:akitacicd/ada#v1.0.11"
 }
 ```
 
@@ -22,14 +22,14 @@ const checkoutCodeStep = new Step({
   }
 })
 
-const checkoutCodeStep = new Step({
+const executeTests = new Step({
   name: 'Run tests',
-  run: clj -M:test
+  run: 'clj -M:test'
 })
 
 const testJob = new Job('test', {
   runsOn: 'ubuntu-latest',
-  steps: [checkoutCodeStep, dependenciesScan]
+  steps: [checkoutCodeStep, executeTests]
 })
 
 export const workflowExample = new Workflow({
