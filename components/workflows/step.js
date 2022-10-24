@@ -23,4 +23,8 @@ class Step extends step_1.StepClass {
     }
 }
 exports.Step = Step;
+new Step({
+    name: "banana",
+    run: "echo 1"
+});
 //# sourceMappingURL=step.js.map

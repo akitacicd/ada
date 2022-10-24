@@ -50,10 +50,10 @@ export interface IJob {
   uses?: string
   environment?: string | {name: string, url: string}
   concurrency?: IConcurrency | string
-  output?: IDefaultKeyPair[]
-  env?: IDefaultKeyPair[]
-  with?: IDefaultKeyPair[]
-  secrets?: IDefaultKeyPair[] | 'inherit'
+  output?: IDefaultKeyPair
+  env?: IDefaultKeyPair
+  with?: IDefaultKeyPair
+  secrets?: IDefaultKeyPair | 'inherit'
   defaults?: IWorkflowDefaults
   strategy?: IStrategy
   continueOnError?: boolean
@@ -70,10 +70,10 @@ export class JobClass {
   public uses?: string
   public environment?: string | {name: string, url: string}
   public concurrency?: IConcurrency | string
-  public output?: IDefaultKeyPair[]
-  public env?: IDefaultKeyPair[]
-  public with?: IDefaultKeyPair[]
-  public secrets?: IDefaultKeyPair[] | 'inherit'
+  public output?: IDefaultKeyPair
+  public env?: IDefaultKeyPair
+  public with?: IDefaultKeyPair
+  public secrets?: IDefaultKeyPair | 'inherit'
   public defaults?: IWorkflowDefaults
   public strategy?: IStrategy
   public 'continue-on-error'?: boolean
