@@ -2,7 +2,7 @@ import * as yaml from 'yaml';
 import { Job } from './job';
 import {WorkflowClass} from '../types/workflows';
 
-type Jobs = {[key: string]: Omit<Job, 'name'>}
+type Jobs = Record<string, Omit<Job, 'name'>>
 
 export class Workflow extends WorkflowClass {
   toString(): string {

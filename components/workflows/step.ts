@@ -21,3 +21,9 @@ export class Step extends StepClass {
     return true;
   }
 }
+
+
+new Step({
+  name: "banana",
+  run: "echo 1"
+})
