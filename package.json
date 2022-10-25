@@ -6,7 +6,7 @@
   },
   "dependencies": {
     "@octokit/core": "^4.0.4",
-    "commander": "^9.4.0",
+    "commander": "^9.4.1",
     "js-base64": "^3.7.2",
     "ts-import": "^4.0.0-beta.6",
     "ts-node": "^10.9.1",
