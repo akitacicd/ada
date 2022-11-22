@@ -9,6 +9,7 @@ export interface IStep {
     bash?: string;
     with?: IDefaultKeyPair;
     env?: IDefaultKeyPair;
+    secrets?: IDefaultKeyPair;
     continueOnError?: boolean;
     timeoutMinutes?: boolean;
 }
@@ -21,6 +22,7 @@ export declare class StepClass implements IStep {
     bash?: string;
     with?: IDefaultKeyPair;
     env?: IDefaultKeyPair;
+    secrets?: IDefaultKeyPair;
     'working-directory'?: string;
     'continue-on-error'?: boolean;
     'timeout-minutes'?: boolean;
