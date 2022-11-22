@@ -10,6 +10,7 @@ export interface IStep {
   bash?: string,
   with?: IDefaultKeyPair, 
   env?: IDefaultKeyPair,
+  secrets?: IDefaultKeyPair,
   continueOnError?: boolean,
   timeoutMinutes?: boolean
 }
@@ -23,6 +24,7 @@ export class StepClass implements IStep {
   public bash?: string;
   public with?: IDefaultKeyPair;
   public env?: IDefaultKeyPair;
+  public secrets?: IDefaultKeyPair;
   public 'working-directory'?: string;
   public 'continue-on-error'?: boolean;
   public 'timeout-minutes'?: boolean;
@@ -36,6 +38,7 @@ export class StepClass implements IStep {
     this.run = stepArgs.run
     this.with = stepArgs.with
     this.env = stepArgs.env
+    this.secrets = stepArgs.secrets
     this['working-directory'] = stepArgs.workingDirectory
     this['continue-on-error'] = stepArgs.continueOnError
     this['timeout-minutes'] = stepArgs.timeoutMinutes
