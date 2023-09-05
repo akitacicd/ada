@@ -20,13 +20,13 @@ jobs:
 
     steps:
       - name: Checkout bin branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: latest
           path: latest
 
       - name: Checkout main branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           path: current
 
