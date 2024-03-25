@@ -50,7 +50,7 @@ export interface IJob {
   uses?: string
   environment?: string | {name: string, url: string}
   concurrency?: IConcurrency | string
-  output?: IDefaultKeyPair
+  outputs?: IDefaultKeyPair
   env?: IDefaultKeyPair
   with?: IDefaultKeyPair
   secrets?: IDefaultKeyPair | 'inherit'
@@ -70,7 +70,7 @@ export class JobClass {
   public uses?: string
   public environment?: string | {name: string, url: string}
   public concurrency?: IConcurrency | string
-  public output?: IDefaultKeyPair
+  public outputs?: IDefaultKeyPair
   public env?: IDefaultKeyPair
   public with?: IDefaultKeyPair
   public secrets?: IDefaultKeyPair | 'inherit'
@@ -91,7 +91,7 @@ export class JobClass {
     this.uses = jobArgs.uses
     this.environment = jobArgs.environment
     this.concurrency = jobArgs.concurrency
-    this.output = jobArgs.output
+    this.outputs = jobArgs.outputs
     this.env = jobArgs.env
     this.with = jobArgs.with
     this.secrets = jobArgs.secrets
