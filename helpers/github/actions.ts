@@ -1,7 +1,7 @@
 import * as yaml from 'yaml';
 import * as base64 from 'js-base64';
 import { Octokit } from '@octokit/core';
-import {IDefaultKeyPair} from '../types/workflows/common';
+import {IDefaultKeyPair} from '../../components/types/workflows/common';
 
 async function fetchFileFromGithub(owner: string, repo: string, path: string, ref: string): Promise<any> {
   const octokit = new Octokit({})

@@ -10,7 +10,7 @@ export class Workflow extends WorkflowClass {
     this.jobs = this.jobs.reduce((allJobs: Jobs, job: Job) => {
       let jobName = job.name
 
-      // @ts-expect-error
+    // @ts-ignore-error
       delete job.name
       let jobObject: Omit<Job, 'name'> = job
       allJobs[jobName] = jobObject
