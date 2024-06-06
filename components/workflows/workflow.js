@@ -8,7 +8,7 @@ class Workflow extends workflows_1.WorkflowClass {
         // @ts-expect-error
         this.jobs = this.jobs.reduce((allJobs, job) => {
             let jobName = job.name;
-            // @ts-expect-error
+            // @ts-ignore-error
             delete job.name;
             let jobObject = job;
             allJobs[jobName] = jobObject;

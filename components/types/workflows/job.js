@@ -6,13 +6,14 @@ class JobClass {
         this.name = name;
         this['runs-on'] = jobArgs.runsOn;
         this['continue-on-error'] = jobArgs.continueOnError;
+        this['timeout-minutes'] = jobArgs.timeoutMinutes || 20;
         this.permissions = jobArgs.permissions;
         this.needs = jobArgs.needs;
         this.if = jobArgs.if;
         this.uses = jobArgs.uses;
         this.environment = jobArgs.environment;
         this.concurrency = jobArgs.concurrency;
-        this.output = jobArgs.output;
+        this.outputs = jobArgs.outputs;
         this.env = jobArgs.env;
         this.with = jobArgs.with;
         this.secrets = jobArgs.secrets;

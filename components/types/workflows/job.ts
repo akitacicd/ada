@@ -43,6 +43,7 @@ interface IService {
 
 export interface IJob {
   runsOn: "ubuntu-latest"| "windows-latest"| "macos-latest" | string
+  timeoutMinutes: Number
   steps: Step[]
   permissions?: IPermission
   needs?: string[]
@@ -50,7 +51,7 @@ export interface IJob {
   uses?: string
   environment?: string | {name: string, url: string}
   concurrency?: IConcurrency | string
-  output?: IDefaultKeyPair
+  outputs?: IDefaultKeyPair
   env?: IDefaultKeyPair
   with?: IDefaultKeyPair
   secrets?: IDefaultKeyPair | 'inherit'
@@ -64,13 +65,14 @@ export interface IJob {
 export class JobClass {
   public name: string
   public 'runs-on': 'ubuntu-latest'| 'windows-latest' | 'macos-latest' | string
+  public 'timeout-minutes': Number
   public permissions?: IPermission
   public needs?: string[]
   public if?: string
   public uses?: string
   public environment?: string | {name: string, url: string}
   public concurrency?: IConcurrency | string
-  public output?: IDefaultKeyPair
+  public outputs?: IDefaultKeyPair
   public env?: IDefaultKeyPair
   public with?: IDefaultKeyPair
   public secrets?: IDefaultKeyPair | 'inherit'
@@ -85,13 +87,14 @@ export class JobClass {
     this.name = name 
     this['runs-on'] = jobArgs.runsOn 
     this['continue-on-error'] = jobArgs.continueOnError
+    this['timeout-minutes'] = jobArgs.timeoutMinutes || 20
     this.permissions = jobArgs.permissions
     this.needs = jobArgs.needs
     this.if = jobArgs.if
     this.uses = jobArgs.uses
     this.environment = jobArgs.environment
     this.concurrency = jobArgs.concurrency
-    this.output = jobArgs.output
+    this.outputs = jobArgs.outputs
     this.env = jobArgs.env
     this.with = jobArgs.with
     this.secrets = jobArgs.secrets

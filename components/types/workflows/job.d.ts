@@ -36,6 +36,7 @@ interface IService {
 }
 export interface IJob {
     runsOn: "ubuntu-latest" | "windows-latest" | "macos-latest" | string;
+    timeoutMinutes: Number;
     steps: Step[];
     permissions?: IPermission;
     needs?: string[];
@@ -46,7 +47,7 @@ export interface IJob {
         url: string;
     };
     concurrency?: IConcurrency | string;
-    output?: IDefaultKeyPair;
+    outputs?: IDefaultKeyPair;
     env?: IDefaultKeyPair;
     with?: IDefaultKeyPair;
     secrets?: IDefaultKeyPair | 'inherit';
@@ -59,6 +60,7 @@ export interface IJob {
 export declare class JobClass {
     name: string;
     'runs-on': 'ubuntu-latest' | 'windows-latest' | 'macos-latest' | string;
+    'timeout-minutes': Number;
     permissions?: IPermission;
     needs?: string[];
     if?: string;
@@ -68,7 +70,7 @@ export declare class JobClass {
         url: string;
     };
     concurrency?: IConcurrency | string;
-    output?: IDefaultKeyPair;
+    outputs?: IDefaultKeyPair;
     env?: IDefaultKeyPair;
     with?: IDefaultKeyPair;
     secrets?: IDefaultKeyPair | 'inherit';
