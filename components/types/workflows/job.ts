@@ -43,6 +43,7 @@ interface IService {
 
 export interface IJob {
   runsOn: "ubuntu-latest"| "windows-latest"| "macos-latest" | string
+  timeoutMinutes: Number
   steps: Step[]
   permissions?: IPermission
   needs?: string[]
@@ -64,6 +65,7 @@ export interface IJob {
 export class JobClass {
   public name: string
   public 'runs-on': 'ubuntu-latest'| 'windows-latest' | 'macos-latest' | string
+  public 'timeout-minutes': Number
   public permissions?: IPermission
   public needs?: string[]
   public if?: string
@@ -85,6 +87,7 @@ export class JobClass {
     this.name = name 
     this['runs-on'] = jobArgs.runsOn 
     this['continue-on-error'] = jobArgs.continueOnError
+    this['timeout-minutes'] = jobArgs.timeoutMinutes || 20
     this.permissions = jobArgs.permissions
     this.needs = jobArgs.needs
     this.if = jobArgs.if
