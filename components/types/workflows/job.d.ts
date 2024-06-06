@@ -36,7 +36,7 @@ interface IService {
 }
 export interface IJob {
     runsOn: "ubuntu-latest" | "windows-latest" | "macos-latest" | string;
-    timeoutMinutes: Number;
+    timeoutMinutes?: Number;
     steps: Step[];
     permissions?: IPermission;
     needs?: string[];
@@ -60,7 +60,7 @@ export interface IJob {
 export declare class JobClass {
     name: string;
     'runs-on': 'ubuntu-latest' | 'windows-latest' | 'macos-latest' | string;
-    'timeout-minutes': Number;
+    'timeout-minutes'?: Number;
     permissions?: IPermission;
     needs?: string[];
     if?: string;
