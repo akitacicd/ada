@@ -1,6 +1,6 @@
 {
   "name": "@akitacicd/ada",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "devDependencies": {
     "typescript": "^4.7.4"
   },
