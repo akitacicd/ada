@@ -12,8 +12,21 @@ export interface IStep {
   env?: IDefaultKeyPair,
   secrets?: IDefaultKeyPair,
   continueOnError?: boolean,
-  timeoutMinutes?: boolean
+  timeoutMinutes?: number
 }
+
+/**
+ * Keys as they are written to the workflow YAML. They are accepted as input so
+ * that passing an already built step back into the constructor keeps its values
+ * instead of silently dropping them.
+ */
+export interface IStepYamlKeys {
+  'working-directory'?: string,
+  'continue-on-error'?: boolean,
+  'timeout-minutes'?: number
+}
+
+export type StepArgs = IStep & IStepYamlKeys
 
 export class StepClass implements IStep {
   public name: string;
@@ -27,9 +40,9 @@ export class StepClass implements IStep {
   public secrets?: IDefaultKeyPair;
   public 'working-directory'?: string;
   public 'continue-on-error'?: boolean;
-  public 'timeout-minutes'?: boolean;
+  public 'timeout-minutes'?: number;
 
-  constructor(stepArgs: IStep) {
+  constructor(stepArgs: StepArgs) {
     this.name = stepArgs.name;
     this.id = stepArgs.id
     this.if = stepArgs.if
@@ -39,8 +52,8 @@ export class StepClass implements IStep {
     this.with = stepArgs.with
     this.env = stepArgs.env
     this.secrets = stepArgs.secrets
-    this['working-directory'] = stepArgs.workingDirectory
-    this['continue-on-error'] = stepArgs.continueOnError
-    this['timeout-minutes'] = stepArgs.timeoutMinutes
+    this['working-directory'] = stepArgs.workingDirectory ?? stepArgs['working-directory']
+    this['continue-on-error'] = stepArgs.continueOnError ?? stepArgs['continue-on-error']
+    this['timeout-minutes'] = stepArgs.timeoutMinutes ?? stepArgs['timeout-minutes']
   }
 }

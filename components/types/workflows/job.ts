@@ -41,9 +41,11 @@ interface IService {
   options?: string
 }
 
+type RunsOn = "ubuntu-latest"| "windows-latest"| "macos-latest" | string
+
 export interface IJob {
-  runsOn: "ubuntu-latest"| "windows-latest"| "macos-latest" | string
-  timeoutMinutes?: Number
+  runsOn: RunsOn
+  timeoutMinutes?: number
   steps: Step[]
   permissions?: IPermission
   needs?: string[]
@@ -62,10 +64,23 @@ export interface IJob {
   services?: IService
 }
 
+/**
+ * Keys as they are written to the workflow YAML. They are accepted as input so
+ * that passing an already built job back into the constructor keeps its values
+ * instead of silently dropping them.
+ */
+export interface IJobYamlKeys {
+  'continue-on-error'?: boolean
+  'timeout-minutes'?: number
+}
+
+export type JobArgs = Omit<IJob, 'runsOn'> & IJobYamlKeys &
+  ({ runsOn: RunsOn } | { 'runs-on': RunsOn })
+
 export class JobClass {
   public name: string
-  public 'runs-on': 'ubuntu-latest'| 'windows-latest' | 'macos-latest' | string
-  public 'timeout-minutes'?: Number
+  public 'runs-on': RunsOn
+  public 'timeout-minutes'?: number
   public permissions?: IPermission
   public needs?: string[]
   public if?: string
@@ -83,11 +98,11 @@ export class JobClass {
   public services?: IService
   public steps: Step[]
 
-  constructor(name: string, jobArgs: IJob) {
-    this.name = name 
-    this['runs-on'] = jobArgs.runsOn 
-    this['continue-on-error'] = jobArgs.continueOnError
-    this['timeout-minutes'] = jobArgs.timeoutMinutes || 20
+  constructor(name: string, jobArgs: JobArgs) {
+    this.name = name
+    this['runs-on'] = 'runsOn' in jobArgs ? jobArgs.runsOn : jobArgs['runs-on']
+    this['continue-on-error'] = jobArgs.continueOnError ?? jobArgs['continue-on-error']
+    this['timeout-minutes'] = jobArgs.timeoutMinutes ?? jobArgs['timeout-minutes'] ?? 20
     this.permissions = jobArgs.permissions
     this.needs = jobArgs.needs
     this.if = jobArgs.if
