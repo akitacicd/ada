@@ -34,9 +34,10 @@ interface IService {
     volumes?: string[];
     options?: string;
 }
+declare type RunsOn = "ubuntu-latest" | "windows-latest" | "macos-latest" | string;
 export interface IJob {
-    runsOn: "ubuntu-latest" | "windows-latest" | "macos-latest" | string;
-    timeoutMinutes?: Number;
+    runsOn: RunsOn;
+    timeoutMinutes?: number;
     steps: Step[];
     permissions?: IPermission;
     needs?: string[];
@@ -57,10 +58,24 @@ export interface IJob {
     container?: IContainer | string;
     services?: IService;
 }
+/**
+ * Keys as they are written to the workflow YAML. They are accepted as input so
+ * that passing an already built job back into the constructor keeps its values
+ * instead of silently dropping them.
+ */
+export interface IJobYamlKeys {
+    'continue-on-error'?: boolean;
+    'timeout-minutes'?: number;
+}
+export declare type JobArgs = Omit<IJob, 'runsOn'> & IJobYamlKeys & ({
+    runsOn: RunsOn;
+} | {
+    'runs-on': RunsOn;
+});
 export declare class JobClass {
     name: string;
-    'runs-on': 'ubuntu-latest' | 'windows-latest' | 'macos-latest' | string;
-    'timeout-minutes'?: Number;
+    'runs-on': RunsOn;
+    'timeout-minutes'?: number;
     permissions?: IPermission;
     needs?: string[];
     if?: string;
@@ -80,6 +95,6 @@ export declare class JobClass {
     container?: IContainer | string;
     services?: IService;
     steps: Step[];
-    constructor(name: string, jobArgs: IJob);
+    constructor(name: string, jobArgs: JobArgs);
 }
 export {};
